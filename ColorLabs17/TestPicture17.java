@@ -86,7 +86,7 @@ public class TestPicture17
         spot1.setRed(red);
     }
     ferris1.explore();
-    
+    ferris1.write("images/SFTry1.jpeg");
     
     
     int green;

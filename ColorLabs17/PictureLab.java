@@ -19,18 +19,70 @@ public class PictureLab
         Picture ferris = new Picture("images/2000 ferris wheel2.jpg");
         Pixel[] pixels; // Set pixels as an array of Pixel from the class
         
-        pixels = ferris.getPixels();// 
+        pixels = ferris.getPixels(); // make pixles an array of this
+                                     // picture's pixles
         
-        
-        
-        
-        for (Pixel spot1 : pixels)
+        //Adjust Red(Double red) by 150%
+        int red;
+        //Defines what the spot is and what its iterating through
+        for (Pixel spot : pixels)
         {
-            //System.out.println(spot1);
-            red=spot1.getRed();
-            red = (int)(red*.25);
-            spot1.setRed(red);
+            red = spot.getRed();
+            red = (int)(red*1.5); //cast as an int(can't be a double)   
+            spot.setRed(red);
         }
-    
+        //ferris.explore();
+        
+        ferris = new Picture("images/2000 ferris wheel2.jpg");
+        pixels = ferris.getPixels();
+        // reopen pictures to reset it along with the array
+        
+        //Negate
+        int negate_val;
+        for (Pixel spot : pixels)
+        {
+            negate_val = (255-spot.getRed());
+            spot.setRed(negate_val);
+            negate_val = (255 - spot.getGreen());
+            spot.setGreen(negate_val);
+            negate_val = (255 - spot.getBlue());
+            spot.setBlue(negate_val);
+        }
+        //ferris.explore();
+        
+        //Grayscale
+        ferris = new Picture("images/2000 ferris wheel2.jpg");
+        Pixel[] pixel_list;
+        pixel_list = ferris.getPixels();
+        
+        int num;
+        int avg;
+        for (Pixel spot : pixel_list)
+        {
+            num = spot.getRed() + spot.getBlue() + spot.getGreen();
+            avg = (int)(num/3);
+            spot.setRed(avg);
+            spot.setGreen(avg);
+            spot.setBlue(avg);
+        }
+        //ferris.explore();
+        
+        
+        //Lighten (50%)
+        
+        ferris = new Picture("images/2000 ferris wheel2.jpg");
+        //Pixel[] pixel_list;  //Already made a new pixel list
+        pixel_list = ferris.getPixels();
+        
+        double light_factor = 1.5;
+        int r, g, b;
+        for (Pixel spot : pixel_list)
+        {
+            r = (int)(spot.getRed() * light_factor);
+            g = (int)(spot.getGreen() * light_factor);
+            b = (int)(spot.getBlue() * light_factor);
+        
+        }
+        ferris.explore();
     }
 }
