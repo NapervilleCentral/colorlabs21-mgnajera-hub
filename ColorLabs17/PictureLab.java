@@ -22,6 +22,8 @@ public class PictureLab
         pixels = ferris.getPixels(); // make pixles an array of this
                                      // picture's pixles
         
+        //ferris.explore();
+                                     
         //Adjust Red(Double red) by 150%
         int red;
         //Defines what the spot is and what its iterating through
@@ -31,7 +33,7 @@ public class PictureLab
             red = (int)(red*1.5); //cast as an int(can't be a double)   
             spot.setRed(red);
         }
-        //ferris.explore();
+        ferris.explore();
         
         ferris = new Picture("images/2000 ferris wheel2.jpg");
         pixels = ferris.getPixels();
@@ -48,7 +50,7 @@ public class PictureLab
             negate_val = (255 - spot.getBlue());
             spot.setBlue(negate_val);
         }
-        //ferris.explore();
+        ferris.explore();
         
         //Grayscale
         ferris = new Picture("images/2000 ferris wheel2.jpg");
@@ -65,24 +67,51 @@ public class PictureLab
             spot.setGreen(avg);
             spot.setBlue(avg);
         }
-        //ferris.explore();
+        ferris.explore();
         
         
         //Lighten (50%)
         
-        ferris = new Picture("images/2000 ferris wheel2.jpg");
-        //Pixel[] pixel_list;  //Already made a new pixel list
-        pixel_list = ferris.getPixels();
+        Picture ferris2 = new Picture("images/2000 ferris wheel2.jpg");
+        Pixel[] pixel_list2;  //Already made a new pixel list
+        pixel_list2 = ferris2.getPixels();
         
         double light_factor = 1.5;
         int r, g, b;
-        for (Pixel spot : pixel_list)
+        for (Pixel spot : pixel_list2)
         {
             r = (int)(spot.getRed() * light_factor);
+            spot.setRed(r);
             g = (int)(spot.getGreen() * light_factor);
+            spot.setGreen(g);
             b = (int)(spot.getBlue() * light_factor);
-        
+            spot.setBlue(b);
         }
-        ferris.explore();
+        ferris2.explore();
+        
+        //change color(blue)
+        ferris2 = new Picture("images/2000 ferris wheel2.jpg");
+        pixel_list2 = ferris2.getPixels();
+        
+        int b_val;
+        for (Pixel spot : pixel_list2)
+        {
+            b_val = (int)(spot.getBlue() * 2);
+            spot.setBlue(b_val);
+        }
+        ferris2.explore();
+        
+        //REDIFY
+        ferris2 = new Picture("images/2000 ferris wheel2.jpg");
+        pixel_list2 = ferris2.getPixels();        
+        for (Pixel spot : pixel_list2)
+        {
+            if (spot.getRed() > 250)
+            {
+                spot.setBlue(255);
+                spot.setRed(100);
+            }
+        }
+        ferris2.explore();
     }
 }
