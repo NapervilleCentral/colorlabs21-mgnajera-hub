@@ -44,7 +44,6 @@ public class SheparFaireyLab
          Color OffWhite = new Color(247,225,227);
          
          /**/
-         
          /*
          
          //First Method
@@ -67,6 +66,7 @@ public class SheparFaireyLab
             else spot.setColor(OffWhite);
          }
          //me.explore();
+         me.write("images\\ShepardFerry1.jpg");
          
          //Second Method
          
@@ -87,7 +87,7 @@ public class SheparFaireyLab
          //min = 5,5,5
          //range = 250
          
-         //Slightly adjusted bucket ranges:
+         //Slightly adjusted bucket ranges for better results:
          for (Pixel spot : pixel_list2)
          {
             if (spot.getRed() > 170) spot.setColor(Darkblue);
@@ -96,10 +96,11 @@ public class SheparFaireyLab
             else spot.setColor(OffWhite);
          }
          me2.explore();
+         me2.write("images\\ShepardFerry2.jpg");
+         
          
          */
-         
-         
+        
          //CUSTOM METHOD
          
          Pixel[] pixel_list3;
@@ -126,17 +127,17 @@ public class SheparFaireyLab
 
          for (Pixel spot : pixel_list3)
          {
-            if (spot.getRed() > 200) spot.setColor(Purple);
-            else if (spot.getRed() > 150) spot.setColor(Blue);
-            else if (spot.getRed() > 100) spot.setColor(LimeYellow);
-            else if (spot.getRed() > 50) spot.setColor(Gold);
+            if (spot.getRed() > 190) spot.setColor(Purple);
+            else if (spot.getRed() > 120) spot.setColor(Blue);
+            else if (spot.getRed() > 95) spot.setColor(LimeYellow);
+            else if (spot.getRed() > 45) spot.setColor(Gold);
             else spot.setColor(offBlue);
          }
          me3.explore();
+         me3.write("images\\ShepardFerry3final.jpg");
          
-         
-         
-         
+         //Wanted more blue less gold
+         //NEEDED A BALANCE OF BLUE AND GOLD
          /**
           * method 2 change
           * 
