@@ -182,6 +182,7 @@ public class Pixel
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
     int value = picture.getBasicPixel(x,y);
+    
 
     // get the red value (starts at 17 so shift right 16)
     // then and it with all 1's for the first 8 bits to keep

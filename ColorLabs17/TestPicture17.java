@@ -35,7 +35,8 @@ public class TestPicture17
      //Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
      //Picture gorge = new Picture("images/2000 gorge.jpg");
      //Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
-
+     
+     Naoya.explore();
      mirrorVertical(flowers);
      
      mirrorVertical(Naoya);
@@ -208,12 +209,14 @@ public class TestPicture17
     
     public static void copytoCnavas(Picture source, Picture target)
     {
+        //recursive copy to a x,y on the source
         Pixel sourcePix = null;
         Pixel targetPix = null;
         
-        //loop thru the columns (targetX is starting point on Canvas)
+        //loop thru the columns (targetX is starting point on Canvas) sourceX += 2 (larger sX = xS + 0.5)
         for (int sourceX = 0, targetX = 0; sourceX < source.getWidth(); sourceX++, targetX++)
         {
+            //go thru the rows                                              sourceY+=2 (larger sY = sY + 0.5)
             for (int sourceY = 0, targetY = 0; sourceY < source.getWidth(); sourceY++, targetY++)
             {
                 sourcePix = source.getPixel(sourceX, sourceY);

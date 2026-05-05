@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=CollageLab
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ CollageLab\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=source\ target\ startX\ startY
+comment2.target=void\ copytoCanvas(Picture,\ Picture,\ int,\ int)
+comment2.text=\r\n\ add\ two\ ints\ to\ aparams\ and\ place\ you\ want\ target\ to\ go\ onto\ the\ canvas\r\n
+comment3.params=apic
+comment3.target=void\ mirrorVertical(Picture)
+comment3.text=\r\n\ Method\ to\ mirror\ around\ a\ vertical\ line\ in\ the\ middle\ of\ the\ picture\r\n\ based\ on\ width\r\n
+comment4.params=
+comment4.target=void\ Shrink()
+comment4.text=\r\n\ Shrinks\ an\ image\r\n
+numComments=5
