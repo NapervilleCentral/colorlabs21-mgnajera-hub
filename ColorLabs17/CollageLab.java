@@ -5,6 +5,12 @@
  * @author (your name)
  * @version (a version number or a date)
  */
+
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
 public class CollageLab
 {
     public static void main(String[] args)
@@ -13,6 +19,7 @@ public class CollageLab
         Picture Canvas = new Picture("images\\canvas.jpg");
         Picture Flowers = new Picture("images\\whiteFlower.jpg");
         
+        //Color Black = new Color(0,0,0);
         //Canvas.explore();
         
         
@@ -20,6 +27,9 @@ public class CollageLab
         copytoCanvas(Flowers, Canvas, 0, 0);
         
         Canvas.explore();
+        
+        edgeDetect(Flowers, 150);
+        Flowers.explore();
     }
     
     
@@ -77,11 +87,70 @@ public class CollageLab
     
     
     /**
+     * Edge Detection
+     */
+    public static void edgeDetect(Picture aPic, int range)
+    {
+        Pixel prevPix = null;
+        Pixel nextPix = null;
+        int prevColor = 0;
+        int nextColor = 0;
+        
+        int threshold = range;
+        
+        for(int y = 0; y < aPic.getHeight(); y++)
+        {
+            for (int x = 1; x < aPic.getWidth(); x++)
+            {
+                prevPix = aPic.getPixel(x - 1, y);
+                nextPix = aPic.getPixel(x, y);
+                
+                prevColor = prevPix.getRed() + prevPix.getGreen() + prevPix.getBlue();
+                nextColor = nextPix.getRed() + nextPix.getGreen() + nextPix.getBlue(); 
+                
+                if (Math.abs(prevColor - nextColor) > threshold && prevColor > 0)
+                {
+                    prevPix.setColor(Color.black);
+                }
+                else
+                {
+                    nextPix.setColor(Color.white);
+                }
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    /**
      * Shrinks an image
      */
     
-    public static void Shrink()
+    public static void Shrink(Picture aPic)
     {
+        //recursive copy to a x,y on the source
         
+        Picture source = aPic;
+        Picture target = aPic;
+        
+        
+        Pixel sourcePix = null;
+        Pixel targetPix = null;
+        
+        //loop thru the columns (targetX is starting point on Canvas) sourceX += 2 (larger sX = xS + 0.5)
+        for (int sourceX = 0, targetX = 0; sourceX < source.getWidth(); sourceX += 2, targetX++)
+        {
+            //go thru the rows                                              sourceY+=2 (larger sY = sY + 0.5)
+            for (int sourceY = 0, targetY = 0; sourceY < source.getHeight(); sourceY += 2, targetY++)
+            {
+                sourcePix = source.getPixel(sourceX, sourceY);
+                targetPix = target.getPixel(targetX, targetY);
+                targetPix.setColor(sourcePix.getColor());
+            }
+            
+        }
     }
 }
