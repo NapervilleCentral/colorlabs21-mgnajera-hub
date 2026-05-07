@@ -26,9 +26,15 @@ public class CollageLab
         Flowers.explore();
         copytoCanvas(Flowers, Canvas, 0, 0);
         
-        Canvas.explore();
+        //Canvas.explore();
         
-        edgeDetect(Flowers, 150);
+        //edgeDetect(Flowers, 150);
+        //edgeDetect(Naoya, 100);
+        //Naoya.explore();
+        Flowers.explore();
+        
+        
+        Shrink(Flowers, Flowers.getHeight(), Flowers.getWidth(), 0, 0);
         Flowers.explore();
     }
     
@@ -129,28 +135,41 @@ public class CollageLab
      * Shrinks an image
      */
     
-    public static void Shrink(Picture aPic)
+    public static void Shrink(Picture aPic, int Height, int Width, int StartX, int StartY)
     {
         //recursive copy to a x,y on the source
         
         Picture source = aPic;
         Picture target = aPic;
         
+        int newWidth = Width/2;
+        int newHeight = Height/2;
         
-        Pixel sourcePix = null;
-        Pixel targetPix = null;
+        int Xoffset = (Width - newWidth)/2;
+        int Yoffset = (Height - newHeight)/2;
         
-        //loop thru the columns (targetX is starting point on Canvas) sourceX += 2 (larger sX = xS + 0.5)
-        for (int sourceX = 0, targetX = 0; sourceX < source.getWidth(); sourceX += 2, targetX++)
+        if (newHeight <= 10)
         {
-            //go thru the rows                                              sourceY+=2 (larger sY = sY + 0.5)
-            for (int sourceY = 0, targetY = 0; sourceY < source.getHeight(); sourceY += 2, targetY++)
-            {
-                sourcePix = source.getPixel(sourceX, sourceY);
-                targetPix = target.getPixel(targetX, targetY);
-                targetPix.setColor(sourcePix.getColor());
-            }
-            
+            return;
         }
+        
+        Pixel pix1 = null;
+        Pixel pix2 = null;
+        
+        for (int y = 0; y < newHeight; y++)
+        {
+            for (int x = 0; x < newWidth; x++)
+            {
+                pix1 = source.getPixel(StartX + x * 2, StartY + y * 2); //original source picture
+                pix2 = target.getPixel(StartX + Xoffset + x, StartY + Yoffset + y);
+                pix2.setColor(pix1.getColor());
+            }
+        }
+        
+        System.out.println(newHeight);
+        System.out.println(Xoffset);
+        System.out.println(Yoffset);
+        //fix the recursive method; does not work!!!
+        Shrink(aPic, newHeight, newWidth, Xoffset, Yoffset);
     }
 }
