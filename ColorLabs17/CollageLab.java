@@ -35,6 +35,7 @@ public class CollageLab
         
         
         Shrink(Flowers, Flowers.getHeight(), Flowers.getWidth(), 0, 0);
+        negate(Flowers);
         Flowers.explore();
     }
     
@@ -145,10 +146,10 @@ public class CollageLab
         int newWidth = Width/2;
         int newHeight = Height/2;
         
-        int Xoffset = (Width - newWidth)/2;
-        int Yoffset = (Height - newHeight)/2;
+        int Xoffset = StartX + (Width - newWidth)/2;
+        int Yoffset = StartY + (Height - newHeight)/2;
         
-        if (newHeight <= 10)
+        if (newHeight <= 1)
         {
             return;
         }
@@ -161,15 +162,72 @@ public class CollageLab
             for (int x = 0; x < newWidth; x++)
             {
                 pix1 = source.getPixel(StartX + x * 2, StartY + y * 2); //original source picture
-                pix2 = target.getPixel(StartX + Xoffset + x, StartY + Yoffset + y);
+                pix2 = target.getPixel(Xoffset + x,Yoffset + y);
                 pix2.setColor(pix1.getColor());
             }
         }
-        
-        System.out.println(newHeight);
-        System.out.println(Xoffset);
-        System.out.println(Yoffset);
-        //fix the recursive method; does not work!!!
+
         Shrink(aPic, newHeight, newWidth, Xoffset, Yoffset);
     }
+    
+    
+    public static void negate(Picture pic)
+    {
+        
+        Pixel pix = null;
+        int negate_val = 0;
+        
+        for (int y = 0; y < pic.getHeight(); y++)
+        {
+            for (int x = 0; x < pic.getWidth(); x++)
+            {
+                pix = pic.getPixel(x, y);
+                negate_val = (255-pix.getRed());
+                pix.setRed(negate_val);
+                negate_val = (255 - pix.getGreen());
+                pix.setGreen(negate_val);
+                negate_val = (255 - pix.getBlue());
+                pix.setBlue(negate_val);
+            }
+        }
+
+    }
+    
+    public static void spiral(Picture apic)
+    {
+        Pixel pix = null;
+        
+        int newX = 0;
+        int newY = 0; //cords of new pixel
+        
+        
+        int centerX = apic.getWidth()/2;
+        int centerY = apic.getHeight()/2; 
+        
+        int r;
+        double theta;
+        double theta_helper; //ratio to put in the atan function
+        
+        for (int y = 0; y < apic.getHeight(); y++)
+        {
+            for (int x = 0; x < apic.getWidth(); x++)
+            {   
+                r = (int)Math.sqrt(Math.pow(x-centerX, 2) + Math.pow(y-centerY, 2));
+                theta_helper = Math.abs(y-centerY)/Math.abs(x-centerX);
+                
+                theta = Math.atan(theta_helper);
+                
+                
+                theta = theta + 1.0; //rotate pixel
+                r = r-4; //shrink radius
+                
+                newX = (int)(r*Math.cos(theta));
+                newY = (int)(r*Math.sin(theta));
+                
+                //apic.getPixel()
+                
+            }
+        }
+    }
+    
 }
