@@ -43,9 +43,21 @@ public class CollageLab
         //negate(Flowers);
         //Flowers.explore();
         
-        CyberP.explore();
+        //CyberP.explore();
+        copytoCanvas(CyberP, Canvas, 0, 0);
+        
+        
+        
+        
         Shrink(CyberP, CyberP.getHeight(), CyberP.getWidth(), 0, 0);
-        CyberP.explore();
+        
+        copytoCanvas(CyberP, Canvas, CyberP.getWidth(),0);
+        
+        stat(CyberP5);
+        
+        copytoCanvas(CyberP5, Canvas, (CyberP.getWidth())*2,0);
+        
+        Canvas.explore();
         
         edgeDetect(CyberP2,200);
         CyberP2.explore();
@@ -53,8 +65,7 @@ public class CollageLab
         mirrorVertical(CyberP4);
         CyberP4.explore();
         
-        negate(CyberP5);
-        CyberP5.explore();
+        
         
         spiral(CyberP3);
         CyberP3.explore();
@@ -198,13 +209,15 @@ public class CollageLab
         Pixel pix = null;
         int negate_val = 0;
         int randd = 0;
+        int counter = 0;
         
         
         for (int y = 0; y < pic.getHeight(); y++)
         {
             for (int x = 0; x < pic.getWidth(); x++)
             {
-                randd = (int)Math.floor((Math.random()*30));
+                //if(counter % 50 == 0)
+                //    randd = (int)Math.floor((Math.random()*30));
                 
                 
                 pix = pic.getPixel(x, y);
@@ -214,10 +227,69 @@ public class CollageLab
                 pix.setGreen(negate_val);
                 negate_val = (255+randd - pix.getBlue());
                 pix.setBlue(negate_val);
+                counter++;
             }
         }
 
     }
+    
+    
+    
+    public static void stat(Picture pic)
+    {
+        Pixel pix = null;
+        int negate_val = 0;
+        int randd = 0;
+        int counter = 0;
+        int buffer = 0;
+        double darkOrLight = 0.0;
+        
+        int valR = 0;
+        int valG = 0;
+        int valB = 0;
+        
+        
+        for (int y = 0; y < pic.getHeight(); y++)
+        {
+            for (int x = 0; x < pic.getWidth(); x++)
+            {
+                if(counter % (50+buffer) == 0)
+                    {
+                    randd = (int)Math.floor((Math.random()*100));
+                    buffer = (int)Math.floor((Math.random()*100));
+                    darkOrLight = Math.random();
+                    }
+                
+                pix = pic.getPixel(x, y);
+                
+                if (darkOrLight < 0.5)
+                {
+                    valR = (randd + pix.getRed());
+                    valG = (randd + pix.getGreen());
+                    valB = (randd + pix.getBlue());
+                }
+                else
+                {
+                    valR = (pix.getRed() - randd);
+                    valG = (pix.getGreen() - randd);
+                    valB = (pix.getBlue() - randd);
+                }
+                
+                pix.setRed(valR);
+                pix.setGreen(valG);
+                pix.setBlue(valB);
+                
+                
+                
+                counter++;
+            }
+        }
+
+    }
+
+    
+    
+    
     
     public static void spiral(Picture apic)
     {
@@ -235,33 +307,37 @@ public class CollageLab
         double theta;
         double theta_helper; //ratio to put in the atan function
         
-        for (int y = 0; y < apic.getHeight()/2; y++)
+        for (int y = 0; y < apic.getHeight(); y++)
         {
-            for (int x = 0; x < apic.getWidth()/2; x++)
+            for (int x = 0; x < apic.getWidth(); x++)
             {   
                 pix = apic.getPixel(x, y);
                 r = (int)Math.sqrt(Math.pow(x-centerX, 2) + Math.pow(y-centerY, 2));
                 
-                System.out.println(r);
+                //System.out.println(r);
                 
-                theta_helper = Math.abs(y-centerY)/Math.abs(x-centerX);
+                if (r < apic.getWidth()/2){
+                    
+                    if (Math.abs(x-centerX) != 0)
+                        theta_helper = Math.abs(y-centerY)/Math.abs(x-centerX);
+                    else
+                        theta_helper = Math.PI;
+                    theta = Math.atan(theta_helper);
                 
-                theta = Math.atan(theta_helper);
-                
-                System.out.println(theta*(180/Math.PI));
+                    //System.out.println(theta*(180/Math.PI));
                 
                 
-                theta = theta + 1.0; //rotate pixel
-                r = r-4; //shrink radius
+                    theta = theta + 1.0; //rotate pixel
+                    r = r-4; //shrink radius
                 
-                newX = (int)(centerX + r*Math.cos(theta));
-                System.out.println(newX);
-                newY = (int)(r*Math.sin(theta));
-                System.out.println(newY);
+                    newX = (int)(centerX + r*Math.cos(theta));
+                    //System.out.println(newX);
+                    newY = (int)(centerY + r*Math.sin(theta));
+                    //System.out.println(newY);
                 
-                newPix = apic.getPixel(newX, newY);
-                newPix.setColor(pix.getColor());
-                
+                    newPix = apic.getPixel(newX, newY);
+                    newPix.setColor(pix.getColor());
+                }
             }
         }
     }
