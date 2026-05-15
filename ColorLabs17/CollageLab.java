@@ -32,6 +32,8 @@ public class CollageLab
         //copytoCanvas(Flowers, Canvas, 0, 0);
         
         //Canvas.explore();
+        Math.random()* howmanynumbers + pushesRange
+        nextInt(3,6)
         
         //edgeDetect(Flowers, 150);
         //edgeDetect(Naoya, 100);
@@ -59,13 +61,15 @@ public class CollageLab
         
         Canvas.explore();
         
-        edgeDetect(CyberP2,200);
+        edgeDetect(CyberP2,220);
         CyberP2.explore();
         
-        mirrorVertical(CyberP4);
-        CyberP4.explore();
+        //mirrorVertical(CyberP4);
+        //CyberP4.explore();
         
-        
+        String str1 = "a";
+        String str2 = "b";
+        System.out.println(str1.compareTo(str2));
         
         spiral(CyberP3);
         CyberP3.explore();
@@ -150,6 +154,7 @@ public class CollageLab
                 if (Math.abs(prevColor - nextColor) > threshold && prevColor > 0)
                 {
                     prevPix.setColor(Color.black);
+                    nextPix.setColor(Color.white);
                 }
                 else
                 {
