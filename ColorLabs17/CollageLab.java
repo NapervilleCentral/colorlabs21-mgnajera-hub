@@ -32,8 +32,6 @@ public class CollageLab
         //copytoCanvas(Flowers, Canvas, 0, 0);
         
         //Canvas.explore();
-        Math.random()* howmanynumbers + pushesRange
-        nextInt(3,6)
         
         //edgeDetect(Flowers, 150);
         //edgeDetect(Naoya, 100);
@@ -312,9 +310,9 @@ public class CollageLab
         double theta;
         double theta_helper; //ratio to put in the atan function
         
-        for (int y = 0; y < apic.getHeight(); y++)
+        for (int y = 0; y < apic.getHeight()/2; y++)
         {
-            for (int x = 0; x < apic.getWidth(); x++)
+            for (int x = 0; x < apic.getWidth()/2; x++)
             {   
                 pix = apic.getPixel(x, y);
                 r = (int)Math.sqrt(Math.pow(x-centerX, 2) + Math.pow(y-centerY, 2));
@@ -333,7 +331,9 @@ public class CollageLab
                 
                 
                     theta = theta + 1.0; //rotate pixel
-                    r = r-4; //shrink radius
+                    r = r-0; //shrink radius
+                    if (r < 10)
+                        r = 10;
                 
                     newX = (int)(centerX + r*Math.cos(theta));
                     //System.out.println(newX);
