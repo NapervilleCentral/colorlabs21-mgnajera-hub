@@ -21,6 +21,7 @@ public class CollageLab
         Picture CyberP3 = new Picture("images\\CyberpunkPoster.jpg");
         Picture CyberP4 = new Picture("images\\CyberpunkPoster.jpg");
         Picture CyberP5 = new Picture("images\\CyberpunkPoster.jpg");
+        Picture CyberP6 = new Picture("images\\CyberpunkPoster.jpg");
         Picture Canvas = new Picture("images\\canvas.jpg");
         Picture Flowers = new Picture("images\\whiteFlower.jpg");
         
@@ -57,20 +58,30 @@ public class CollageLab
         
         copytoCanvas(CyberP5, Canvas, (CyberP.getWidth())*2,0);
         
+        edgeDetect(CyberP2,300-30);
+        
+        copytoCanvas(CyberP2, Canvas, 0,CyberP.getHeight());
+    
+        mirrorVertical(CyberP4);
+        
+        copytoCanvas(CyberP4, Canvas, CyberP.getWidth(),CyberP.getHeight());
+        
+        negate(CyberP6);
+        //edgeDetect(CyberP6,240);
+        
+        copytoCanvas(CyberP6, Canvas, CyberP.getWidth()*2,CyberP.getHeight());
+        
+        
         Canvas.explore();
         
-        edgeDetect(CyberP2,220);
-        CyberP2.explore();
         
-        //mirrorVertical(CyberP4);
-        //CyberP4.explore();
+        Canvas.write("images\\COLLAGECYBERPUNKFINAL.jpg");
+        //String str1 = "a";
+        //String str2 = "b";
+        //System.out.println(str1.compareTo(str2));
         
-        String str1 = "a";
-        String str2 = "b";
-        System.out.println(str1.compareTo(str2));
-        
-        spiral(CyberP3);
-        CyberP3.explore();
+        //spiral(CyberP3);
+        //CyberP3.explore();
     }
     
     
@@ -149,7 +160,7 @@ public class CollageLab
                 prevColor = prevPix.getRed() + prevPix.getGreen() + prevPix.getBlue();
                 nextColor = nextPix.getRed() + nextPix.getGreen() + nextPix.getBlue(); 
                 
-                if (Math.abs(prevColor - nextColor) > threshold && prevColor > 0)
+                if (Math.abs(prevColor - nextColor) > threshold) // && prevColor > 0
                 {
                     prevPix.setColor(Color.black);
                     nextPix.setColor(Color.white);
